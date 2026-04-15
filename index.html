@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARK — The Execution Layer for AI Agents</title>
+<meta name="description" content="Stop overpaying for AI agent decisions. ARK routes each step to the right model, tracks cost per decision, and learns across runs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafafa;--white:#ffffff;--text:#0f0f0f;--text-secondary:#555;--text-tertiary:#888;--border:#e5e5e5;--border-light:#f0f0f0;--green:#16a34a;--terminal-bg:#0f1117;--card-shadow:0 1px 3px rgba(0,0,0,0.04),0 1px 2px rgba(0,0,0,0.06);--card-shadow-hover:0 4px 12px rgba(0,0,0,0.08)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}.wrap{max-width:1080px;margin:0 auto;padding:0 32px}.announce{background:var(--white);border-bottom:1px solid var(--border);text-align:center;padding:10px 16px;font-size:13px;font-weight:500;color:var(--text-secondary)}.announce a{color:var(--text);text-decoration:none;font-weight:600}.announce a:hover{text-decoration:underline}nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px;position:sticky;top:0;z-index:100}.nav-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:60px}.logo-link{display:flex;align-items:center;gap:10px;text-decoration:none}.logo-img{height:28px;width:auto}.logo-text{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:20px;color:var(--text);letter-spacing:2px}.nav-links{display:flex;gap:32px;align-items:center}.nav-links a{color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500;transition:color .15s}.nav-links a:hover{color:var(--text)}.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;transition:all .15s;border:none}.btn-dark{background:var(--text);color:#fff}.btn-dark:hover{background:#333}.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}.btn-outline:hover{border-color:var(--text-tertiary);background:var(--white)}.btn svg{width:16px;height:16px}.hero{padding:96px 0 72px;text-align:center}.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:100px;padding:6px 16px 6px 8px;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:32px;box-shadow:var(--card-shadow)}.hero-badge-dot{width:8px;height:8px;background:var(--green);border-radius:50%}h1{font-size:56px;font-weight:600;line-height:1.1;letter-spacing:-2px;margin-bottom:20px;max-width:720px;margin-left:auto;margin-right:auto}h1 .underline{text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:6px;text-decoration-thickness:3px}.hero-sub{font-size:18px;color:var(--text-secondary);line-height:1.65;max-width:520px;margin:0 auto 40px}.hero-actions{display:flex;gap:12px;justify-content:center;margin-bottom:48px}.hero-providers{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--text-tertiary);font-weight:500}.provider-tag{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-secondary)}.screenshot-section{padding:0 0 96px;text-align:center}.screenshot-label{font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text-tertiary);margin-bottom:16px}.screenshot-wrap{max-width:840px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,0.12),0 0 0 1px rgba(0,0,0,0.08)}.screenshot-wrap img{width:100%;display:block}.section{padding:96px 0}.section+.section{border-top:1px solid var(--border)}.section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-tertiary);margin-bottom:12px;font-weight:500}.section-title{font-size:36px;font-weight:700;letter-spacing:-1px;margin-bottom:16px;line-height:1.15}.section-desc{font-size:16px;color:var(--text-secondary);line-height:1.6;margin-bottom:48px;max-width:540px}.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:28px 24px;transition:box-shadow .2s,transform .2s}.feature-card:hover{box-shadow:var(--card-shadow-hover);transform:translateY(-1px)}.feature-card h3{font-size:15px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}.feature-card h3 span{font-size:18px}.feature-card p{font-size:14px;color:var(--text-secondary);line-height:1.6}.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}.stat-item{text-align:center;padding:28px 16px}.stat-item+.stat-item{border-left:1px solid var(--border)}.stat-val{font-family:'IBM Plex Mono',monospace;font-size:32px;font-weight:700;color:var(--text)}.stat-label{font-size:13px;color:var(--text-tertiary);margin-top:6px;font-weight:500}.compare-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}.compare-table th,.compare-table td{padding:15px 24px;text-align:left;font-size:14px;border-bottom:1px solid var(--border-light)}.compare-table thead th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-tertiary);background:#f7f7f7;padding:12px 24px}.compare-table td:first-child{font-weight:600;color:var(--text)}.compare-table td:nth-child(2){color:var(--text-tertiary)}.compare-table td:nth-child(3){color:var(--text);font-weight:600}.compare-table tr:last-child td{border-bottom:none}.config-block{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:28px 32px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.85;color:var(--text);max-width:440px;white-space:pre;box-shadow:var(--card-shadow)}.config-block .cc{color:var(--text-tertiary)}.config-block .ck{color:#6366f1}.cta-section{padding:96px 0;text-align:center;border-top:1px solid var(--border)}.cta-section h2{font-size:36px;font-weight:700;letter-spacing:-1px;margin-bottom:12px}.cta-section p{color:var(--text-secondary);font-size:16px;margin-bottom:12px}.cta-install{font-family:'IBM Plex Mono',monospace;font-size:14px;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 24px;display:inline-block;color:var(--text-secondary);margin-bottom:32px;box-shadow:var(--card-shadow)}.cta-install b{color:var(--text);font-weight:500}footer{border-top:1px solid var(--border);background:var(--white);padding:56px 0 40px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}.footer-brand p{font-size:14px;color:var(--text-secondary);line-height:1.6;max-width:280px;margin-top:12px}.footer-col h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-tertiary);margin-bottom:16px}.footer-col a,.footer-col span{display:block;font-size:14px;color:var(--text-secondary);text-decoration:none;margin-bottom:10px;transition:color .15s}.footer-col a:hover{color:var(--text)}.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text-tertiary)}.footer-bottom a{color:var(--text-tertiary);text-decoration:none}.footer-bottom a:hover{color:var(--text)}@media(max-width:768px){h1{font-size:36px;letter-spacing:-1px}.hero{padding:64px 0 48px}.features-grid{grid-template-columns:1fr}.stats-bar{grid-template-columns:repeat(2,1fr)}.stats-bar .stat-item:nth-child(3){border-left:none}.nav-links a:not(.btn){display:none}.hero-actions{flex-direction:column;align-items:center}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}.footer-bottom{flex-direction:column;gap:8px}.section{padding:64px 0}.wrap{padding:0 20px}}
+</style>
+</head>
+<body>
+
+<div class="announce">
+  Open source · Apache 2.0 · Built in Go · <a href="https://github.com/atripati/ark">Star on GitHub →</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo-link">
+      <img src="images/logo.png" alt="ARK" class="logo-img">
+      <span class="logo-text">ARK</span>
+    </a>
+    <div class="nav-links">
+      <a href="https://github.com/atripati/ark#readme">Docs</a>
+      <a href="https://github.com/atripati/ark/blob/main/CONTRIBUTING.md">Contribute</a>
+      <a href="https://github.com/atripati/ark" class="btn btn-dark">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero wrap">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    106 tests passing · 11 tools · zero dependencies
+  </div>
+  <h1>Stop overpaying for <span class="underline">AI agent decisions.</span></h1>
+  <p class="hero-sub">ARK routes each step to the right model, tracks cost per decision, and learns what works. Single Go binary. Open source.</p>
+  <div class="hero-actions">
+    <a href="https://github.com/atripati/ark" class="btn btn-dark">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      Get Started
+    </a>
+    <a href="#demo" class="btn btn-outline">See it work ↓</a>
+  </div>
+  <div class="hero-providers">
+    Works with
+    <span class="provider-tag">OpenAI</span>
+    <span class="provider-tag">Anthropic</span>
+    <span class="provider-tag">Ollama</span>
+  </div>
+</section>
+
+<section class="screenshot-section wrap" id="demo">
+  <div class="screenshot-label">Real output from a live run</div>
+  <div class="screenshot-wrap">
+    <img src="images/terminal.png" alt="ARK cost report and model routing output">
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-eyebrow">Capabilities</div>
+  <h2 class="section-title">Everything an agent runtime needs.</h2>
+  <p class="section-desc">ARK sits between your agent and the LLM provider. It optimizes every decision for cost, quality, and speed.</p>
+  <div class="features-grid">
+    <div class="feature-card"><h3><span>⚡</span> Per-step model routing</h3><p>Tool calls go to cheap models. Reasoning goes to strong models. The router learns from failures and self-improves across runs.</p></div>
+    <div class="feature-card"><h3><span>💰</span> Cost per decision</h3><p>Every step has a dollar amount. Cost feeds back into tool ranking — expensive unreliable tools get demoted automatically.</p></div>
+    <div class="feature-card"><h3><span>📉</span> 99% less context waste</h3><p>MCP servers dump 60K+ tokens into every prompt. ARK loads 3–5 relevant tools per task. Context goes to reasoning.</p></div>
+    <div class="feature-card"><h3><span>🧠</span> Persistent learning</h3><p>Successful tools rise. Failing tools drop. Query patterns are remembered. Routing decisions persist across restarts.</p></div>
+    <div class="feature-card"><h3><span>🛡️</span> Grounding gate</h3><p>When tools are available, the LLM cannot answer without using them. Zero hallucinated answers across 30 stress test runs.</p></div>
+    <div class="feature-card"><h3><span>🔌</span> Connect any API</h3><p>Define HTTP tools in agent.yaml with ${ENV_VAR} support. ARK handles allowlisting, validation, and learning. No code.</p></div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-val">106</div><div class="stat-label">Tests passing</div></div>
+    <div class="stat-item"><div class="stat-val">11</div><div class="stat-label">Built-in tools</div></div>
+    <div class="stat-item"><div class="stat-val">3</div><div class="stat-label">LLM providers</div></div>
+    <div class="stat-item"><div class="stat-val">0</div><div class="stat-label">Dependencies</div></div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-eyebrow">Before &amp; After</div>
+  <h2 class="section-title">What changes when you add ARK.</h2>
+  <p class="section-desc">ARK doesn't replace your tools or your models. It makes every interaction between them more efficient.</p>
+  <table class="compare-table">
+    <thead><tr><th></th><th>Without ARK</th><th>With ARK</th></tr></thead>
+    <tbody>
+      <tr><td>Context usage</td><td>60,468 tokens on schemas</td><td>~80 tokens (99.9% reduction)</td></tr>
+      <tr><td>Model selection</td><td>One model for everything</td><td>Right model per step, learned</td></tr>
+      <tr><td>Cost visibility</td><td>Monthly API bill</td><td>Per-step, per-tool, per-action</td></tr>
+      <tr><td>Tool ranking</td><td>Manual, static</td><td>Learned from every execution</td></tr>
+      <tr><td>Hallucination</td><td>LLM guesses without tools</td><td>Grounding gate enforced</td></tr>
+      <tr><td>Setup</td><td>Python + SDKs + frameworks</td><td>Single Go binary, zero deps</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section wrap">
+  <div class="section-eyebrow">Configuration</div>
+  <h2 class="section-title">Three lines to enable routing.</h2>
+  <p class="section-desc">Add a strategy to your agent.yaml. ARK handles everything else.</p>
+  <div class="config-block"><span class="cc"># agent.yaml</span>
+<span class="ck">model</span>:
+  <span class="ck">provider</span>: openai
+  <span class="ck">strategy</span>: cost_optimized
+  <span class="ck">fast_model</span>: gpt-4o-mini
+  <span class="ck">strong_model</span>: gpt-4o</div>
+</section>
+
+<section class="cta-section wrap">
+  <h2>Try ARK in 30 seconds.</h2>
+  <p>No API keys needed for demos. Clone, build, run.</p>
+  <div class="cta-install"><b>$</b> git clone https://github.com/atripati/ark.git && cd ark && go run ./cmd/ark demo</div>
+  <br>
+  <a href="https://github.com/atripati/ark" class="btn btn-dark" style="padding:14px 32px;font-size:15px;">
+    <svg viewBox="0 0 16 16" fill="currentColor" width="18" height="18"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    View on GitHub
+  </a>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo-link">
+          <img src="images/logo.png" alt="ARK" class="logo-img">
+          <span class="logo-text">ARK</span>
+        </a>
+        <p>The execution layer for AI agents. Per-step model routing, cost attribution, and persistent learning.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="https://github.com/atripati/ark#readme">Documentation</a>
+        <a href="https://github.com/atripati/ark">GitHub</a>
+        <a href="https://github.com/atripati/ark/blob/main/CONTRIBUTING.md">Contribute</a>
+        <a href="https://github.com/atripati/ark/blob/main/LICENSE">License</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://github.com/atripati/ark#quick-start">Quick Start</a>
+        <a href="https://github.com/atripati/ark#roadmap">Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:atripat6@depaul.edu">atripat6@depaul.edu</a>
+        <span>(312) 451-7569</span>
+        <span>243 S Wabash Ave</span>
+        <span>Chicago, IL 60604</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ARK · Apache 2.0 · Built by <a href="https://github.com/atripati">Abhishek Tripathi</a></span>
+      <a href="https://github.com/atripati/ark">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
